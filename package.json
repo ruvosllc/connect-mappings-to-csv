@@ -17,8 +17,8 @@
     "csv",
     "transform"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "paul.anderson@ruvos.com",
+  "license": "MIT",
   "dependencies": {
     "bluebird": "^3.5.3",
     "commander": "^2.19.0",

@@ -9,7 +9,14 @@
   "bin": {
     "connect-mappings-to-csv": "index.js"
   },
-  "keywords": [],
+  "keywords": [
+    "🐼",
+    "mirth",
+    "connect",
+    "mappings",
+    "csv",
+    "transform"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {

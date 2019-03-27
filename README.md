@@ -26,8 +26,8 @@ Options:
 
 ## Defaults
 
-`inputDirectory` defaults to `./`
-`outputPath` defaults to `mappings-<timestamp>.csv`
+`inputDirectory` defaults to `./`  
+`outputPath` defaults to `mappings-<timestamp>.csv`  
 `fields` defaults to all
 
 

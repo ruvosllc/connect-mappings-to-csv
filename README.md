@@ -6,7 +6,7 @@
 ## Install
 
 ```
-$ npm install -g https://gitlab.ruvos.com/paul.anderson/connect-mappings-to-csv
+$ npm install -g connect-mappings-to-csv
 ```
 
 

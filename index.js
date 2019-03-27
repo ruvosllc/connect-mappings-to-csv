@@ -1,37 +1,26 @@
-const xmlParser = require('xml2json')
-const fs = require('fs-extra')
-const Promise = require('bluebird')
-const { parse } = require('json2csv')
+const commander = require('commander')
+const packageInfo = require('./package.json')
+const lib = require('./lib')
 
-const jsonToCsv = parse
+const fieldParser = fstr => fstr.split(',').map(f => f.trim())
 
-const fields = [
-  'AIMSPlatformEmail',
-  'AIMSPlatformFilename'
-]
+commander
+  .version(packageInfo.version)
+  .option('-i, --input-directory <inputDirectory>', 'Directory location of XML files to parse')
+  .option('-o, --output-path <outputPath>', 'Path to write output CSV')
+  .option('-f, --fields <fields>', 'Comma delimited list of fields to include', fieldParser)
+  .parse(process.argv)
 
-const outputPath = './out.csv'
+const inputDirectory = commander.inputDirectory || './'
+const outputPath = commander.outputPath || `mappings-${new Date().getTime()}.csv`
+const fields = commander.fields
 
-let fileCount
-
-fs.readdir('./')
-  .then(filenames => {
-    const filtered = filenames.filter(filename => /\.xml$/.exec(filename))
-    fileCount = filtered.length
-    return filtered
-  })
-  .then(xmlFilenames => Promise.map(xmlFilenames, xmlFilename => fs.readFile(xmlFilename)))
-  .then(xmlFiles => xmlFiles.map(xmlFile => xmlParser.toJson(xmlFile, { object: true })))
-  .then(jsonFiles => jsonFiles.map(json => json['java.util.Collections_-UnmodifiableMap'].m.entry.reduce((agg, entry) => {
-    if (Array.isArray(entry.string)) {
-      agg[entry.string[0]] = entry.string[1]
-    } else {
-      agg[entry.string] = Object.assign({}, entry, { string: undefined })
-    }
-    return agg
-  }, {})))
-  .then(entries => jsonToCsv(entries, { fields }))
-  .then(csv => fs.writeFile(outputPath, csv))
-  .then(() => {
-    console.log(`Transformed ${fileCount} XML files into ${outputPath}`)
-  })
+lib({
+  inputDirectory,
+  outputPath,
+  fields
+}).then(({ fileCount }) => {
+  console.log(`Transformed ${fileCount} XML files from ${inputDirectory} into ${outputPath}`)
+}).catch(err => {
+  console.error(`Error: ${err.message}`)
+})

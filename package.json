@@ -1,0 +1,18 @@
+{
+  "name": "2019-03-27-impacted-by-organism_tested",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.3",
+    "fs-extra": "^7.0.1",
+    "json2csv": "^4.4.1",
+    "xml2json": "^0.11.2"
+  }
+}

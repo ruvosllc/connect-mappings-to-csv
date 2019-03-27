@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const commander = require('commander')
 const packageInfo = require('./package.json')
 const lib = require('./lib')

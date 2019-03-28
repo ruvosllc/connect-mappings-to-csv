@@ -10,7 +10,7 @@ $ npm install -g connect-mappings-to-csv
 ```
 
 
-## Usage
+## CLI Usage
 
 ```
 Usage: connect-mappings-to-csv [options]
